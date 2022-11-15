@@ -14,6 +14,9 @@ public class BoatControls : MonoBehaviour
     public float cameraHeight = 5f;
     public Rigidbody boatBody;
 
+    [Header("Camera")]
+    public bool cameraOn;
+
     private Transform cameraTransform;
     // Start is called before the first frame update
     void Start()
@@ -81,7 +84,11 @@ public class BoatControls : MonoBehaviour
             boatBody.MoveRotation(boatBody.rotation * boatRotation); // Rotates the boat when prompted
         }
 
-        cameraTransform.position = transform.position + transform.rotation * new Vector3(0, cameraHeight, -cameraDistanceFromPlayer);
-        cameraTransform.rotation = Quaternion.LookRotation(transform.position - cameraTransform.position);
+        if (cameraOn)
+        {
+            cameraTransform.position = transform.position + transform.rotation * new Vector3(0, cameraHeight, -cameraDistanceFromPlayer);
+            cameraTransform.rotation = Quaternion.LookRotation(transform.position - cameraTransform.position);
+        }
+        
     }
 }
