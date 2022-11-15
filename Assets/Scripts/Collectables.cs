@@ -4,18 +4,25 @@ using UnityEngine;
 
 public class Collectables : MonoBehaviour
 {
-    public Transform Boat;
+    public Transform boat;
     [SerializeField] bool hooked;
     private float speed;
     [SerializeField] Harpoon harpoon;
     [SerializeField] Transform lockPosition;
+    [SerializeField] private bool locked;
+    [SerializeField] private float rotateSpeed;
 
 
     private void Update()
     {
         if (hooked == true)
         {
-            transform.position = Vector3.MoveTowards(transform.position, Boat.position, speed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, boat.position, speed * Time.deltaTime);
+        }
+
+        if (locked == true)
+        {
+            transform.LookAt(transform.position + (boat.position - transform.position));
         }
     }
 
@@ -38,6 +45,8 @@ public class Collectables : MonoBehaviour
             lockPosition = other.GetComponentInChildren<HarpoonAim>().collecionArea;
             harpoon.DestroyHarpoon();
             transform.position = lockPosition.position;
+            locked = true;
+           
         }
     }
 }
