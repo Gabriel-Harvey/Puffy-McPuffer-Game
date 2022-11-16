@@ -1,3 +1,5 @@
+
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -118,3 +120,4 @@ public class HillGeneration : MonoBehaviour
         mesh.UploadMeshData(false);
     }
 }
+

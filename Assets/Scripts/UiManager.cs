@@ -1,7 +1,9 @@
+
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor.UI;
+
 
 public class UiManager : MonoBehaviour
 {
@@ -24,3 +26,4 @@ public class UiManager : MonoBehaviour
         }
     }
 }
+
