@@ -17,6 +17,7 @@ public class Harpoon : MonoBehaviour
     [SerializeField] private bool timerOn = true;
     private bool stopLooking;
     public Rigidbody rb;
+    public GameObject currentRock;
 
     [Header("Collecting Iteams")]
     [SerializeField] bool collected;
@@ -77,6 +78,7 @@ public class Harpoon : MonoBehaviour
             fireTimer = 0f;
             Destroy(rb);
             launcher.GetComponent<HarpoonAim>().HarpoonHit();
+            currentRock = collision.gameObject;
         }
         else if (collision.gameObject.tag == "Collectable" & collected == false)
         {

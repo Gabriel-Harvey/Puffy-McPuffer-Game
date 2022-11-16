@@ -21,9 +21,6 @@ public class HarpoonBoatMovement : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotateSpeed * Time.deltaTime);
         }
 
-        
-
-        
     }
 
     public void Actived(GameObject poon)
@@ -34,9 +31,10 @@ public class HarpoonBoatMovement : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "NearHookable")
+        if (other.tag == "Hookable" & moving == true)
         {
             moving = false;
+            harpoon.GetComponent<Harpoon>().DestroyHarpoon();
         }
     }
 }
