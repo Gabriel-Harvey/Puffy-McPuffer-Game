@@ -13,6 +13,7 @@ public class Collectables : MonoBehaviour
     [SerializeField] Transform lockPosition;
     [SerializeField] private bool locked;
     [SerializeField] private float rotateSpeed;
+    public int questScore;
 
 
     private void Update()
@@ -47,8 +48,10 @@ public class Collectables : MonoBehaviour
             lockPosition = other.GetComponentInChildren<HarpoonAim>().collecionArea;
             harpoon.DestroyHarpoon();
             transform.position = lockPosition.position;
+            questScore = questScore + 1;
             locked = true;
-           
+
+            print(questScore);
         }
     }
 }

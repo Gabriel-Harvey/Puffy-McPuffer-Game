@@ -323,6 +323,7 @@ MonoBehaviour:
   lockPosition: {fileID: 0}
   locked: 0
   rotateSpeed: 0
+  questScore: 0
 --- !u!4 &55936870
 Transform:
   m_ObjectHideFlags: 0
@@ -2154,6 +2155,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeedForward: 0
   moveSpeedBackwards: 0
+  speedClamp: 100
   turnSpeed: 50
   turnAngle: 0
   boatTurning: {x: 0, y: 0, z: 0}
@@ -5900,6 +5902,52 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 82e6d7bb4c25ee54f82d69cd098c0c97, type: 3}
   m_PrefabInstance: {fileID: 541169503}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1883914242
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1883914244}
+  - component: {fileID: 1883914243}
+  m_Layer: 0
+  m_Name: QuestManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1883914243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1883914242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6c3e13da8b3c9448131f452a146f93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questScore: {fileID: 0}
+  crates: {fileID: 55936868}
+--- !u!4 &1883914244
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1883914242}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 9.748774, y: 7.254073, z: -10.222292}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1887047101
 GameObject:
   m_ObjectHideFlags: 0

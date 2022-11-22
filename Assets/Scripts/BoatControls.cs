@@ -75,7 +75,7 @@ public class BoatControls : MonoBehaviour
             }
         }
 
-        print(velocity);
+       // print(velocity);
 
         if (Input.GetKey("a")) // Registers the input
         {
