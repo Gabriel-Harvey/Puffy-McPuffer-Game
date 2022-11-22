@@ -8,6 +8,7 @@ public class BoatControls : MonoBehaviour
 {
     public float moveSpeedForward;
     public float moveSpeedBackwards;
+    public float speedClamp = 100f;
     public float turnSpeed;
     public float turnAngle;
     public Vector3 boatTurning;
@@ -37,14 +38,13 @@ public class BoatControls : MonoBehaviour
     {
 
         Vector3 velocity = boatBody.velocity;
-        boatBody.velocity = Vector3.zero;
-        boatBody.velocity = transform.forward * velocity.magnitude;
+        boatBody.velocity = transform.forward * Mathf.Clamp(velocity.magnitude, -speedClamp, speedClamp);
 
         if (Input.GetKey("w")) // Registers the input
             {
             if(moveSpeedForward <= moveMaxSpeed)
             {
-                moveSpeedForward += 5f; // moveSpeed is multiplied over time to the cap
+                moveSpeedForward += 25f; // moveSpeed is multiplied over time to the cap
             }
             float force = Input.GetAxis("Vertical");
             boatBody.AddForce(transform.forward * moveSpeedForward * force);
@@ -53,7 +53,7 @@ public class BoatControls : MonoBehaviour
         {
             if (moveSpeedForward > 0f)
             {
-                moveSpeedForward -= 5f; // moveSpeed is subtracted over time to zero
+                moveSpeedForward -= 25f; // moveSpeed is subtracted over time to zero
             } 
         }
 
@@ -61,18 +61,21 @@ public class BoatControls : MonoBehaviour
         {
             if (moveSpeedBackwards <= moveMaxSpeed)
             {
-                moveSpeedBackwards += 5f; // moveSpeed is added over time to the cap
+                moveSpeedBackwards += 25f; // moveSpeed is added over time to the cap
             }
             float force = Input.GetAxis("Vertical");
-            boatBody.AddForce(transform.forward * moveSpeedBackwards * force);
+            boatBody.AddForce(velocity * moveSpeedBackwards * force);
+            
         }
         else
         {
             if (moveSpeedBackwards > 0f)
             {
-                moveSpeedBackwards -= 5f; // moveSpeed is subtracted over time to zero
+                moveSpeedBackwards -= 25f; // moveSpeed is subtracted over time to zero
             }
         }
+
+        print(velocity);
 
         if (Input.GetKey("a")) // Registers the input
         {
@@ -91,7 +94,7 @@ public class BoatControls : MonoBehaviour
             cameraTransform.position = transform.position + transform.rotation * new Vector3(0, cameraHeight, -cameraDistanceFromPlayer);
             cameraTransform.rotation = Quaternion.LookRotation(transform.position - cameraTransform.position);
         }
-        
+
     }
 }
 
