@@ -6,11 +6,11 @@ using UnityEngine;
 
 public class BoatControls : MonoBehaviour
 {
+    
     public float moveSpeedForward;
     public float moveSpeedBackwards;
     public float speedClamp = 100f;
     public float turnSpeed;
-    public float turnAngle;
     public Vector3 boatTurning;
     public float moveMaxSpeed = 70f; // Change this for max speed, along with the drag value in the rigidbody
     public float cameraDistanceFromPlayer = 5f;
@@ -26,20 +26,28 @@ public class BoatControls : MonoBehaviour
     {
         boatBody = GetComponent<Rigidbody>();
         cameraTransform = Camera.main.transform;
-        moveSpeedForward = 0f;
-        moveSpeedBackwards = 0f;
-        turnAngle = 0f;
+       // moveSpeedForward = 0f;
+       // moveSpeedBackwards = 0f;
+        
        // turnSpeed = 50f; // Change this for turning speed, along with the angular drag value in the rigidbody
         boatTurning = new Vector3(0, turnSpeed, 0);
     }
+    private void Update()
+    {
+        float force = Input.GetAxis("Vertical");
+        boatBody.AddForce((force * transform.forward).normalized * moveSpeedForward * Time.deltaTime, ForceMode.Acceleration);
+        if (boatBody.velocity.magnitude >= moveMaxSpeed)
+            boatBody.velocity = boatBody.velocity.normalized * moveMaxSpeed;
 
+
+    }
     // FixedUpdate is called once per frame
     void FixedUpdate()
     {
 
         Vector3 velocity = boatBody.velocity;
-        boatBody.velocity = transform.forward * Mathf.Clamp(velocity.magnitude, -speedClamp, speedClamp);
-
+        //boatBody.velocity = transform.forward * Mathf.Clamp(velocity.magnitude, -speedClamp, speedClamp);
+/*
         if (Input.GetKey("w")) // Registers the input
             {
             if(moveSpeedForward <= moveMaxSpeed)
@@ -61,7 +69,7 @@ public class BoatControls : MonoBehaviour
         {
             if (moveSpeedBackwards <= moveMaxSpeed)
             {
-                moveSpeedBackwards += 25f; // moveSpeed is added over time to the cap
+                moveSpeedBackwards -= 25f; // moveSpeed is added over time to the cap
             }
             float force = Input.GetAxis("Vertical");
             boatBody.AddForce(velocity * moveSpeedBackwards * force);
@@ -74,7 +82,7 @@ public class BoatControls : MonoBehaviour
                 moveSpeedBackwards -= 25f; // moveSpeed is subtracted over time to zero
             }
         }
-
+*/
        // print(velocity);
 
         if (Input.GetKey("a")) // Registers the input

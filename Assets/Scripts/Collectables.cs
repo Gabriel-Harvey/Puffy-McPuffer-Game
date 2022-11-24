@@ -48,7 +48,7 @@ public class Collectables : MonoBehaviour
             lockPosition = other.GetComponentInChildren<HarpoonAim>().collecionArea;
             harpoon.DestroyHarpoon();
             transform.position = lockPosition.position;
-            questScore = questScore + 1;
+            questScore += 1;
             locked = true;
 
             print(questScore);
