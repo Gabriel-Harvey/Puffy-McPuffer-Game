@@ -18,6 +18,7 @@ public class HarpoonCamera : MonoBehaviour
         {
             Cursor.lockState = CursorLockMode.Locked;
         }
-        
+
+        Cursor.lockState = CursorLockMode.Confined;
     }
 }

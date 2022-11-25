@@ -77,7 +77,7 @@ public class Harpoon : MonoBehaviour
             timerOn = false;
             fireTimer = 0f;
             Destroy(rb);
-            launcher.GetComponent<HarpoonAim>().HarpoonHit();
+            launcher.GetComponent<CameraAim>().HarpoonHit(); //change for differnt aiming system 
             currentRock = collision.gameObject;
         }
         else if (collision.gameObject.tag == "Collectable" & collected == false)
@@ -105,7 +105,8 @@ public class Harpoon : MonoBehaviour
 
     public void DestroyHarpoon()
     {
-        launcher.GetComponent<HarpoonAim>().HarpoonDead();
+        //launcher.GetComponent<HarpoonAim>().HarpoonDead();
+        launcher.GetComponent<CameraAim>().HarpoonDead();
         Destroy(gameObject);
     }
 
