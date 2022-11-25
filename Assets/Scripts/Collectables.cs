@@ -50,7 +50,8 @@ public class Collectables : MonoBehaviour
             transform.position = lockPosition.position;
             questScore += 1;
             locked = true;
-            gameObject.GetComponent<SelectionManager>().enabled = false;
+            //gameObject.GetComponent<SelectionManager>().enabled = false;
+            Destroy(gameObject.GetComponent<SelectionManager>());
             
             print(questScore);
         }
