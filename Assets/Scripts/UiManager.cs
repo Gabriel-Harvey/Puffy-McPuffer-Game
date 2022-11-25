@@ -11,15 +11,18 @@ public class UiManager : MonoBehaviour
     public GameObject questMenu;
     [SerializeField] bool menuUp;
     [SerializeField] Animator QuestMenuAnimator;
-    [SerializeField] Collectables questScore;
+    [SerializeField] Collectables[] questScore;
     [SerializeField] Sprite[] questIconsArray;
-    [SerializeField] Image questIconsImage;
-    public GameObject crates;
+    [SerializeField] Image[] questIconsImage;
+    public GameObject[] crates;
 
     // Start is called before the first frame update
     void Start()
     {
-        questScore = crates.GetComponent<Collectables>();
+        for (int i = 0; i < 3; i++)
+        {
+            questScore[i] = crates[i].GetComponent<Collectables>();
+        }
     }
 
     void Update()
@@ -35,10 +38,14 @@ public class UiManager : MonoBehaviour
             QuestMenuAnimator.SetBool("MenuUp", false);
         }
 
-        if (questScore.questScore >= 1)
+        for  (int i = 0; i < 3; i++)
         {
-            questIconsImage.sprite = questIconsArray[1];
-        }
+            if (questScore[i].questScore >= 1)
+            {
+                questIconsImage[i].sprite = questIconsArray[1];
+            }
+        } 
+        
     }
 }
 
