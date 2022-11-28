@@ -9,7 +9,7 @@ public class HarpoonBoatMovement : MonoBehaviour
     [Header("Movement")]
     [SerializeField] private GameObject harpoon;
     [SerializeField] private float speed;
-    public bool moving;
+    [HideInInspector] public bool moving;
     public float rotateSpeed = 5f;
 
     [Header("Collider Management")]
