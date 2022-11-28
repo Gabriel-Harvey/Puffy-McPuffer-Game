@@ -13,9 +13,12 @@ public class CameraAim : MonoBehaviour
     public GameObject harpoonPrefab;
     [SerializeField] private GameObject currentHarpoon;
     public Transform spawnPoint;
-    public float speed = 10f;
-    public float returnSpeed = 10f;
     public bool readyToFire = true;
+
+    [Header("Harpoon Speed Values")]
+    public float launchSpeed;
+    public float returnSpeed;
+
 
     [Header("Moving Towards Harpoon")]
     [SerializeField] private bool hit;
@@ -39,7 +42,7 @@ public class CameraAim : MonoBehaviour
             Fire();
             readyToFire = false;
         }
-        else if (Input.GetMouseButtonDown(0) & readyToFire == false)
+        else if (Input.GetMouseButtonUp(0) & readyToFire == false)
         {
             currentHarpoon.GetComponent<Harpoon>().ReturnToBoat();
         }
@@ -66,7 +69,7 @@ public class CameraAim : MonoBehaviour
     public void Fire()
     {
         var harpoon = Instantiate(harpoonPrefab, spawnPoint.position, spawnPoint.rotation);
-        harpoon.GetComponent<Rigidbody>().velocity = spawnPoint.forward * speed;
+        harpoon.GetComponent<Rigidbody>().velocity = spawnPoint.forward * launchSpeed;
         currentHarpoon = harpoon;
     }
 

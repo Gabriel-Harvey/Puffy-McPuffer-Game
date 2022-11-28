@@ -8520,9 +8520,9 @@ MonoBehaviour:
   harpoonPrefab: {fileID: 3016704377951521041, guid: e9e6919b15f5c6f4494cd446ddc54761, type: 3}
   currentHarpoon: {fileID: 0}
   spawnPoint: {fileID: 398179661}
-  speed: 10
-  returnSpeed: 10
   readyToFire: 1
+  launchSpeed: 25
+  returnSpeed: 25
   hit: 0
   movement: {fileID: 601115944}
 --- !u!4 &1717316198 stripped

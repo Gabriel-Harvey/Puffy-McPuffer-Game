@@ -10,7 +10,7 @@ public class Harpoon : MonoBehaviour
     [SerializeField] private float fireTimer;
     [SerializeField] private float timeAlive;
     [SerializeField] private GameObject launcher;
-    public float speed;
+    public float returnSpeed;
     
 
     [Header("Hitting Rocks")]
@@ -28,7 +28,7 @@ public class Harpoon : MonoBehaviour
     private void Awake()
     {
         FindBoat();
-        speed = launcher.GetComponent<HarpoonAim>().returnSpeed;
+        returnSpeed = launcher.GetComponent<CameraAim>().returnSpeed;
     }
 
     void timer()
@@ -41,7 +41,7 @@ public class Harpoon : MonoBehaviour
         else if (fireTimer >= timeAlive & timerOn == true)
         {
             rb.velocity = Vector3.zero;
-            transform.position = Vector3.MoveTowards(transform.position, launcher.transform.position, speed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, launcher.transform.position, returnSpeed * Time.deltaTime);
         }
     }
 
@@ -53,7 +53,7 @@ public class Harpoon : MonoBehaviour
         if (stopLooking == true)
         {
             rb.velocity = Vector3.zero;
-            transform.position = Vector3.MoveTowards(transform.position, launcher.transform.position, speed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, launcher.transform.position, returnSpeed * Time.deltaTime);
         }
     }
 

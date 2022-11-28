@@ -164,9 +164,10 @@ MonoBehaviour:
   fireTimer: 0
   timeAlive: 5
   launcher: {fileID: 0}
-  speed: 6
+  returnSpeed: 6
   timerOn: 1
   rb: {fileID: 488303269490623579}
+  currentRock: {fileID: 0}
   collected: 0
   ropePosition: {fileID: 8626556287515109813}
 --- !u!1 &4179198869417265906

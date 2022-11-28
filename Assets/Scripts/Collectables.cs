@@ -34,7 +34,7 @@ public class Collectables : MonoBehaviour
         if (collision.gameObject.tag == "Harpoon")
         {
             harpoon = collision.gameObject.GetComponentInParent<Harpoon>();
-            speed = harpoon.speed;
+            speed = harpoon.returnSpeed;
             hooked = true;
         }
     }
