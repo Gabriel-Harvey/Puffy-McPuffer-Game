@@ -15,6 +15,7 @@ public class BoatMovement : MonoBehaviour
     private bool moveBackward = false;
     private bool turnLeft = false;
     private bool turnRight = false;
+    
 
     [Header("Key Inputs")]
     [SerializeField] private KeyCode forwardKey;
@@ -77,10 +78,11 @@ public class BoatMovement : MonoBehaviour
         {
             transform.Rotate(transform.up * -turnSpeed);
         }
+
         if (turnRight)
         {
             transform.Rotate(transform.up * turnSpeed);
-        }
+        }    
     }
 
     /// <summary>
