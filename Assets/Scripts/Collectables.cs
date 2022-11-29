@@ -7,7 +7,7 @@ using UnityEngine;
 public class Collectables : MonoBehaviour
 {
     public Transform boat;
-    [SerializeField] bool hooked;
+    [SerializeField] public bool hooked;
     private float speed;
     [SerializeField] Harpoon harpoon;
     [SerializeField] Transform lockPosition;

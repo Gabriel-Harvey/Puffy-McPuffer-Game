@@ -10,11 +10,12 @@ public class Waypoint : MonoBehaviour
     public Text distanceToTarget;
     public Camera cam;
     public Vector3 offset;
-    Collectables hooked;
+    public Collectables questObjects;
 
     // Start is called before the first frame update
     void Start()
     {
+        Collectables questObjects = FindObjectOfType<Collectables>();
     }
 
     // Update is called once per frame
@@ -46,8 +47,9 @@ public class Waypoint : MonoBehaviour
 
         questImage.transform.position = pos;
         distanceToTarget.text = ((int)Vector3.Distance(targetPosition.position, transform.position)).ToString() + "m";
+        print(questObjects);
 
-        if (hooked == true)
+        if (questObjects.hooked == true)
         {
             questImage.enabled = false;
             distanceToTarget.enabled = false;
