@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748172, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3411,9 +3411,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   harpoon: {fileID: 0}
-  speed: 4
+  speed: 10
   moving: 0
-  rotateSpeed: 5
+  rotateSpeed: 1
   cameraAim: {fileID: 1700540709}
   radius: 2.75
   height: 10.58
@@ -3458,9 +3458,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 006ddc334f5f1d6498607cfcab5bd2c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turnSpeed: 1.5
+  turnSpeed: 2
   moveSpeed: 20
-  maxMoveSpeed: 15
+  maxMoveSpeed: 20
   forwardKey: 119
   backKey: 115
   rightKey: 100
@@ -9326,8 +9326,8 @@ MonoBehaviour:
   currentHarpoon: {fileID: 0}
   spawnPoint: {fileID: 398179661}
   readyToFire: 1
-  launchSpeed: 10
-  returnSpeed: 10
+  launchSpeed: 50
+  returnSpeed: 50
   hit: 0
   movement: {fileID: 601115944}
 --- !u!4 &1717316198 stripped
