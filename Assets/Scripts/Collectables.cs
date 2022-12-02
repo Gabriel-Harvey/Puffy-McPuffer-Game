@@ -14,8 +14,12 @@ public class Collectables : MonoBehaviour
     [SerializeField] private bool locked;
     [SerializeField] private float rotateSpeed;
     public int questScore;
+    private SelectionManager selection;
 
-
+    private void Awake()
+    {
+        selection = gameObject.GetComponent<SelectionManager>();
+    }
     private void Update()
     {
         if (hooked == true)
@@ -23,10 +27,6 @@ public class Collectables : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, boat.position, speed * Time.deltaTime);
         }
 
-        if (locked == true)
-        {
-            transform.LookAt(transform.position + (boat.position - transform.position));
-        }
     }
 
     public void OnCollisionEnter(Collision collision)
@@ -43,18 +43,67 @@ public class Collectables : MonoBehaviour
     {
         if (other.tag == "PlayerBoat" & hooked == true)
         {
-            transform.SetParent(other.transform);
-            hooked = false;
-            lockPosition = other.GetComponentInChildren<HarpoonAim>().collecionArea;
-            harpoon.DestroyHarpoon();
-            transform.position = lockPosition.position;
-            questScore += 1;
-            locked = true;
-            //gameObject.GetComponent<SelectionManager>().enabled = false;
-            Destroy(gameObject.GetComponent<SelectionManager>());
+           
+            if (other.GetComponentInChildren<CameraAim>().Stored == false)
+            {
+                ConnectToBoat(other.attachedRigidbody, other.gameObject);
+
+                questScore += 1;
+                print(questScore);
+                other.GetComponentInChildren<CameraAim>().Stored = true;
+            }
+            else 
+            {
+                questScore += 1;
+                print(questScore);
+
+                harpoon.DestroyHarpoon();
+                Invisble();
+            }
+
             
-            print(questScore);
         }
+        
+    }
+
+    public void ConnectToBoat(Rigidbody boatRB, GameObject boat)
+    {
+        //Harpoon
+        hooked = false;
+        harpoon.DestroyHarpoon();
+
+        //Pull Position
+        lockPosition = boat.GetComponentInChildren<CameraAim>().collecionArea;
+        transform.position = lockPosition.position;
+        transform.LookAt(new Vector3(boat.transform.position.x, transform.position.y, boat.transform.position.z));
+
+
+        //Selection Marker
+        if (selection.active == true)
+        {
+            selection.selectedMarker.SetActive(false);
+        }
+        Destroy(selection);
+
+        //Rigidbody
+        Rigidbody RB = gameObject.GetComponent<Rigidbody>();
+        RB.isKinematic = false;
+
+        //Adding Hinge
+        HingeMangement(boatRB);
+    }
+
+    public void HingeMangement(Rigidbody boat)
+    {
+        HingeJoint hinge = gameObject.GetComponent<HingeJoint>();
+
+        //Boat Connection
+        hinge.connectedBody = boat;
+    }
+
+    private void Invisble()
+    {
+        gameObject.SetActive(false);
     }
 }
 

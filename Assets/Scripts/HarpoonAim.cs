@@ -26,7 +26,7 @@ public class HarpoonAim : MonoBehaviour
     public HarpoonBoatMovement movement;
 
     [Header("Items")]
-    [HideInInspector] public Transform collecionArea;
+    public Transform collecionArea;
     
 
     [Header("Rope")]

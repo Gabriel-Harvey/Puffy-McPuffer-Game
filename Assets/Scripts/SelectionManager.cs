@@ -9,6 +9,7 @@ public class SelectionManager : MonoBehaviour
     public GameObject selectedMarker;
     private CameraAim cameraAim;
     public Transform harpoonLockPos;
+    public bool active;
 
     public void Start()
     {
@@ -18,12 +19,14 @@ public class SelectionManager : MonoBehaviour
     private void OnMouseEnter()
     {
         selectedMarker.SetActive(true);
+        active = true;
         cameraAim.target = harpoonLockPos;
     }
 
     private void OnMouseExit()
     {
         selectedMarker.SetActive(false);
+        active = false;
         cameraAim.target = null;
     }
 

@@ -27,6 +27,10 @@ public class CameraAim : MonoBehaviour
     //[Header("Rope")]
     //private LineRenderer lr;
 
+    [Header("Collectables")]
+    public Transform collecionArea;
+    public bool Stored;
+
 
 
     private void Awake()
