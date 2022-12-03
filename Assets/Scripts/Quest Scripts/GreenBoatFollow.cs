@@ -42,7 +42,11 @@ public class GreenBoatFollow : MonoBehaviour
                 GetComponent<DialogueTrigger>().TriggerDialogue();
                 followAllowed = true;
             }
-            
+           
+        }
+        if(Vector3.Distance(transform.position, transformPlayer.position) > 20 || followAllowed == true)
+        {
+            interactImage.SetActive(false);
         }
     }
 
