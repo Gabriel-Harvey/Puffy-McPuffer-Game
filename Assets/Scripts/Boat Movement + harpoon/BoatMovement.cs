@@ -15,6 +15,9 @@ public class BoatMovement : MonoBehaviour
     private bool moveBackward = false;
     private bool turnLeft = false;
     private bool turnRight = false;
+
+    public bool wonRace = false;
+    public PurpleBoatRacing race;
     
 
     [Header("Key Inputs")]
@@ -96,6 +99,19 @@ public class BoatMovement : MonoBehaviour
             _rb.velocity = transform.forward * maxMoveSpeed;
         else if (_rb.velocity.magnitude > maxMoveSpeed && moveBackward)
             _rb.velocity = -transform.forward * maxMoveSpeed;
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Goal")
+        {
+            if (race.raceAllowed == true)
+            {
+                GetComponent<DialogueTrigger>().TriggerDialogue();
+                wonRace = true;
+            }
+           
+        }
     }
 
 }

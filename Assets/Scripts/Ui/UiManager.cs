@@ -14,6 +14,7 @@ public class UiManager : MonoBehaviour
     [SerializeField] Collectables[] questScore;
     [SerializeField] Sprite[] questIconsArray;
     [SerializeField] Image[] questIconsImage;
+    [SerializeField] public Text countdownRace;
     public GameObject[] crates;
 
     // Start is called before the first frame update
@@ -44,8 +45,7 @@ public class UiManager : MonoBehaviour
             {
                 questIconsImage[i].sprite = questIconsArray[1];
             }
-        } 
-        
+        }
     }
 }
 
