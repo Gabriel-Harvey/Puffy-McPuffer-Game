@@ -8,8 +8,8 @@ public class PurpleBoatRacing : MonoBehaviour
     public GameObject interactImage;
     public Transform transformPlayer;
     public BoatMovement playerRaceCondition;
-    public float raceSpeed = 20f;
-    public float raceSmoothTime = 2f;
+    public float raceSpeed = 15f;
+    public float raceSmoothTime = 0.5f;
     public float raceTurnSpeed = 20f;
     public float countdown = 5f;
     public int countdownInt;

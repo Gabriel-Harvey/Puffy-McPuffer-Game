@@ -39,14 +39,18 @@ public class BoatMovement : MonoBehaviour
 
     private void MyInput()
     {
-        if (Input.GetKey(forwardKey))
-            moveForward = true;
-        else
-            moveForward = false;
-        if (Input.GetKey(backKey))
-            moveBackward = true;
-        else
-            moveBackward = false;
+        if (race.startCounter == false)
+        {
+            if (Input.GetKey(forwardKey))
+                moveForward = true;
+            else
+                moveForward = false;
+            if (Input.GetKey(backKey))
+                moveBackward = true;
+            else
+                moveBackward = false;
+        }
+        
         if (Input.GetKey(leftKey))
             turnLeft = true;
         else
