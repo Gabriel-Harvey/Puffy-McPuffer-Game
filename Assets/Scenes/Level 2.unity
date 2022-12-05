@@ -1286,6 +1286,10 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6707948935137621312, guid: 37e184b4ebfc5024fadb84c84f5bdc10, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6707948935137621313, guid: 37e184b4ebfc5024fadb84c84f5bdc10, type: 3}
       propertyPath: speed
       value: 20
@@ -1344,7 +1348,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6707948935137621327, guid: 37e184b4ebfc5024fadb84c84f5bdc10, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 28.1
+      value: 42.3
       objectReference: {fileID: 0}
     - target: {fileID: 6707948935137621327, guid: 37e184b4ebfc5024fadb84c84f5bdc10, type: 3}
       propertyPath: m_LocalPosition.z
