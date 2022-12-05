@@ -8,16 +8,18 @@ public class PurpleBoatRacing : MonoBehaviour
     public GameObject interactImage;
     public Transform transformPlayer;
     public BoatMovement playerRaceCondition;
-    public float raceSpeed = 15f;
+    public float raceSpeed = 30f;
     public float raceSmoothTime = 0.5f;
     public float raceTurnSpeed = 20f;
     public float countdown = 5f;
     public int countdownInt;
     public bool reachedPoint = false;
+    public bool finishedQuest = false;
     public bool turn = false;
     public bool startCounter = false;
     public GameObject raceGoal;
     public GameObject startPos;
+    public GameObject levelGoal;
     Vector3 velocityBoat;
 
     [SerializeField]
@@ -27,7 +29,7 @@ public class PurpleBoatRacing : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        raceGoal.SetActive(false);
+       // raceGoal.SetActive(false);
     }
 
     // Update is called once per frame
@@ -45,21 +47,23 @@ public class PurpleBoatRacing : MonoBehaviour
         }
         if(raceAllowed == false && Vector3.Distance(transform.position, transformPlayer.position) < 20)
         {
-            interactImage.SetActive(true);
-            if (Input.GetKeyDown(raceButton))
+            if (playerRaceCondition.wonRace == false)
             {
-                startCounter = true;
+                interactImage.SetActive(true);
+                if (Input.GetKeyDown(raceButton))
+                {
+                    startCounter = true;
 
-                interactImage.SetActive(false);
-                raceGoal.SetActive(true);
-                StartCoroutine(Wait());
-            }
-            if (startCounter == true)
-            {
-                raceUI.countdownRace.enabled = true;
-                if (countdown >= 0)
-                
-                    countdown -= Time.deltaTime;
+                    interactImage.SetActive(false);
+                    // raceGoal.SetActive(true);
+                    StartCoroutine(Wait());
+                }
+                if (startCounter == true)
+                {
+                    raceUI.countdownRace.enabled = true;
+                    if (countdown >= 0)
+
+                        countdown -= Time.deltaTime;
                     countdownInt = Mathf.RoundToInt(countdown);
                     raceUI.countdownRace.text = "Race starts in... " + countdownInt.ToString() + "!";
                 }
@@ -67,13 +71,16 @@ public class PurpleBoatRacing : MonoBehaviour
                 {
                     startCounter = false;
                 }
-                
             }
+
             else
             {
                 raceUI.countdownRace.enabled = false;
                 countdown = 5;
             }
+        }
+                
+            
         
         if(raceAllowed == true || Vector3.Distance(transform.position, transformPlayer.position) > 20)
         {
@@ -102,10 +109,13 @@ public class PurpleBoatRacing : MonoBehaviour
     }
     public IEnumerator Lost()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(0.1f);
         print("go to waypoint");
         //insert point for where boat should go when done
-        //transform.position = Vector3.SmoothDamp(transform.position, levelGoal.transform.position, ref velocityBoat, raceSmoothTime, raceSpeed);
+        transform.position = Vector3.SmoothDamp(transform.position, levelGoal.transform.position, ref velocityBoat, raceSmoothTime, raceSpeed);
+        transform.rotation = Quaternion.Slerp(transform.rotation
+                , Quaternion.LookRotation(levelGoal.transform.position - transform.position)
+                , raceTurnSpeed * Time.deltaTime);
     }
 
     public IEnumerator StartAgain()
@@ -131,6 +141,11 @@ public class PurpleBoatRacing : MonoBehaviour
         {
             other.gameObject.GetComponent<DialogueTrigger>().TriggerDialogue();
             reachedPoint = true;
+        }
+
+        if (other.tag == "Finish")
+        {
+            finishedQuest = true;
         }
     }
 }
