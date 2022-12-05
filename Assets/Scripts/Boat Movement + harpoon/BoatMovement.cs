@@ -18,7 +18,9 @@ public class BoatMovement : MonoBehaviour
 
     public bool wonRace = false;
     public PurpleBoatRacing race;
-    
+
+    public GameObject rubble;
+    public bool rubbleTriggered = false;
 
     [Header("Key Inputs")]
     [SerializeField] private KeyCode forwardKey;
@@ -115,6 +117,16 @@ public class BoatMovement : MonoBehaviour
                 wonRace = true;
             }
            
+        }
+
+        if (other.tag == "Rubble Trigger")
+        {
+            if(rubbleTriggered == false)
+            {
+                rubbleTriggered = true;
+                rubble.SetActive(true);
+            }
+            
         }
     }
 
