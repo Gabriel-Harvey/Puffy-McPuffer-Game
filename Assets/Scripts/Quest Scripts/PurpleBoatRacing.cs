@@ -20,6 +20,8 @@ public class PurpleBoatRacing : MonoBehaviour
     public GameObject raceGoal;
     public GameObject startPos;
     public GameObject levelGoal;
+    public GameObject checkpointOne;
+    public GameObject checkpointTwo;
     Vector3 velocityBoat;
 
     [SerializeField]
@@ -112,9 +114,9 @@ public class PurpleBoatRacing : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         print("go to waypoint");
         //insert point for where boat should go when done
-        transform.position = Vector3.SmoothDamp(transform.position, levelGoal.transform.position, ref velocityBoat, raceSmoothTime, raceSpeed);
+        transform.position = Vector3.SmoothDamp(transform.position, checkpointOne.transform.position, ref velocityBoat, raceSmoothTime, raceSpeed);
         transform.rotation = Quaternion.Slerp(transform.rotation
-                , Quaternion.LookRotation(levelGoal.transform.position - transform.position)
+                , Quaternion.LookRotation(checkpointOne.transform.position - transform.position)
                 , raceTurnSpeed * Time.deltaTime);
     }
 
@@ -141,6 +143,22 @@ public class PurpleBoatRacing : MonoBehaviour
         {
             other.gameObject.GetComponent<DialogueTrigger>().TriggerDialogue();
             reachedPoint = true;
+        }
+
+        if (other.tag == "Checkpoint 1")
+        {
+            transform.position = Vector3.SmoothDamp(transform.position, checkpointTwo.transform.position, ref velocityBoat, raceSmoothTime, raceSpeed);
+            transform.rotation = Quaternion.Slerp(transform.rotation
+                    , Quaternion.LookRotation(checkpointTwo.transform.position - transform.position)
+                    , raceTurnSpeed * Time.deltaTime);
+        }
+
+        if (other.tag == "Checkpoint 2")
+        {
+            transform.position = Vector3.SmoothDamp(transform.position, levelGoal.transform.position, ref velocityBoat, raceSmoothTime, raceSpeed);
+            transform.rotation = Quaternion.Slerp(transform.rotation
+                    , Quaternion.LookRotation(levelGoal.transform.position - transform.position)
+                    , raceTurnSpeed * Time.deltaTime);
         }
 
         if (other.tag == "Finish")
