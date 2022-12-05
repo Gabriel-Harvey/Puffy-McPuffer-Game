@@ -183,6 +183,8 @@ MonoBehaviour:
   turnSpeed: 1.5
   moveSpeed: 20
   maxMoveSpeed: 15
+  wonRace: 0
+  race: {fileID: 0}
   forwardKey: 119
   backKey: 115
   rightKey: 100
@@ -614,6 +616,8 @@ MonoBehaviour:
   returnSpeed: 25
   hit: 0
   movement: {fileID: 6707948935137621313}
+  collecionArea: {fileID: 0}
+  Stored: 0
 --- !u!1 &6707948936476385911
 GameObject:
   m_ObjectHideFlags: 0
