@@ -17,7 +17,6 @@ public class PurpleBoatRacing : MonoBehaviour
     public bool finishedQuest = false;
     public bool turn = false;
     public bool startCounter = false;
-    public bool checkpointPassed = false;
     public GameObject raceGoal;
     public GameObject startPos;
     public GameObject levelGoal;
@@ -72,10 +71,14 @@ public class PurpleBoatRacing : MonoBehaviour
                 }
                 else
                 {
-                    
-                    
-                    countdown = 5;
+                    startCounter = false;
                 }
+            }
+
+            else
+            {
+                raceUI.countdownRace.enabled = false;
+                countdown = 5;
             }
         }
                 
@@ -95,19 +98,7 @@ public class PurpleBoatRacing : MonoBehaviour
         {
             raceGoal.SetActive(false);
             raceAllowed = false;
-            CheckForGoal();
-        }
-    }
-
-    public void CheckForGoal()
-    {
-        if (checkpointPassed == false)
-        {
             StartCoroutine(Lost());
-        }
-        else
-        {
-            StopCoroutine(CheckpointTwoGo());
         }
     }
 
@@ -117,34 +108,15 @@ public class PurpleBoatRacing : MonoBehaviour
         yield return new WaitForSeconds(5);
         raceAllowed = true;
         startCounter = false;
-        raceUI.countdownRace.enabled = false;
     }
     public IEnumerator Lost()
     {
         yield return new WaitForSeconds(0.1f);
+        print("go to waypoint");
         //insert point for where boat should go when done
         transform.position = Vector3.SmoothDamp(transform.position, checkpointOne.transform.position, ref velocityBoat, raceSmoothTime, raceSpeed);
         transform.rotation = Quaternion.Slerp(transform.rotation
                 , Quaternion.LookRotation(checkpointOne.transform.position - transform.position)
-                , raceTurnSpeed * Time.deltaTime);
-    }
-
-    public IEnumerator CheckpointTwoGo()
-    {
-        yield return new WaitForSeconds(0.1f);
-        transform.position = Vector3.SmoothDamp(transform.position, checkpointTwo.transform.position, ref velocityBoat, raceSmoothTime, raceSpeed);
-        transform.rotation = Quaternion.Slerp(transform.rotation
-                , Quaternion.LookRotation(checkpointTwo.transform.position - transform.position)
-                , raceTurnSpeed * Time.deltaTime);
-    }
-
-    public IEnumerator FinishGoalGo()
-    {
-        StopCoroutine(CheckpointTwoGo());
-        yield return new WaitForSeconds(0.1f);
-        transform.position = Vector3.SmoothDamp(transform.position, levelGoal.transform.position, ref velocityBoat, raceSmoothTime, raceSpeed);
-        transform.rotation = Quaternion.Slerp(transform.rotation
-                , Quaternion.LookRotation(levelGoal.transform.position - transform.position)
                 , raceTurnSpeed * Time.deltaTime);
     }
 
@@ -175,12 +147,18 @@ public class PurpleBoatRacing : MonoBehaviour
 
         if (other.tag == "Checkpoint 1")
         {
-            checkpointPassed = true;          
+            transform.position = Vector3.SmoothDamp(transform.position, checkpointTwo.transform.position, ref velocityBoat, raceSmoothTime, raceSpeed);
+            transform.rotation = Quaternion.Slerp(transform.rotation
+                    , Quaternion.LookRotation(checkpointTwo.transform.position - transform.position)
+                    , raceTurnSpeed * Time.deltaTime);
         }
 
         if (other.tag == "Checkpoint 2")
         {
-            StartCoroutine(FinishGoalGo());
+            transform.position = Vector3.SmoothDamp(transform.position, levelGoal.transform.position, ref velocityBoat, raceSmoothTime, raceSpeed);
+            transform.rotation = Quaternion.Slerp(transform.rotation
+                    , Quaternion.LookRotation(levelGoal.transform.position - transform.position)
+                    , raceTurnSpeed * Time.deltaTime);
         }
 
         if (other.tag == "Finish")

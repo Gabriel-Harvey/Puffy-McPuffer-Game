@@ -5,10 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/HarpoonTest.unity
     guid: 148904422bd08e844bbb3b027fdda740
-  - enabled: 1
-    path: Assets/Scenes/Level 2.unity
-    guid: 18853c6fb73b9a947ab7d1772cba6014
   m_configObjects: {}
